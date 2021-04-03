@@ -67,6 +67,30 @@ namespace RestWithASPNETUdemy.Controllers
             return BadRequest("Invalid Input");
         }
 
+        [HttpGet("average/{firstNumber}/{secondNumber}")]
+        public IActionResult average(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && (IsNumeric(secondNumber)))
+            {
+                var average = (ConvertToDecimal(firstNumber) + ConvertToDecimal(secondNumber) ) / 2;
+                return Ok(average.ToString());
+            }
+
+            return BadRequest("Invalid Input");
+        }
+
+        [HttpGet("square-root/{firstNumber}")]
+        public IActionResult SquareRoot(string firstNumber)
+        {
+
+            if (IsNumeric(firstNumber))
+            {
+                var SquareRoot = Math.Sqrt((double)ConvertToDecimal(firstNumber));
+                return Ok(SquareRoot.ToString());
+            }
+
+            return BadRequest("Invalid Input");
+        }
 
 
         private bool IsNumeric(string strNumber)
